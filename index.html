@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Resources Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --card-bg: rgba(15, 23, 42, 0.7);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --accent-color: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #cbd5e1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            overflow-x: hidden;
+        }
+
+        /* Animated background blobs */
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(168, 85, 247, 0.2));
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: -1;
+            animation: move 20s infinite alternate;
+        }
+
+        .blob-1 { top: -10%; left: -10%; }
+        .blob-2 { bottom: -10%; right: -10%; animation-delay: -5s; }
+
+        @keyframes move {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(100px, 50px) scale(1.1); }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            margin-top: 2rem;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            backdrop-filter: blur(8px);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 320px;
+            z-index: 1;
+        }
+
+        /* Image Background Layer */
+        .card-bg-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            opacity: 0.4; /* Default opacity */
+        }
+
+        /* Dark Overlay Layer for Text Legibility */
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.9));
+            z-index: -1;
+            transition: opacity 0.4s;
+        }
+
+        .card:hover .card-bg-img {
+            transform: scale(1.1);
+            opacity: 0.6;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            border: 1px solid var(--card-border);
+            transition: all 0.4s;
+            backdrop-filter: blur(4px);
+        }
+
+        .card:hover .card-icon {
+            transform: rotate(-10deg) scale(1.1);
+            background: var(--accent-color);
+            color: #000;
+            border-color: transparent;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .card-footer {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            transition: gap 0.3s;
+        }
+
+        .card:hover .card-footer {
+            gap: 1rem;
+        }
+
+        /* Card-Specific Images */
+        .card-github .card-bg-img { background-image: url('https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&q=80&w=800'); }
+        .card-q10 .card-bg-img { background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=800'); }
+        .card-classroom .card-bg-img { background-image: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800'); }
+        .card-educaplay .card-bg-img { background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800'); }
+
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .card { height: auto; min-height: 280px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <header>
+        <h1>Resource Hub</h1>
+        <p class="subtitle">A curated collection of your most essential professional and educational platforms.</p>
+    </header>
+
+    <div class="dashboard-grid">
+        <!-- GitHub -->
+        <a href="https://github.com/" target="_blank" class="card card-github">
+            <div class="card-bg-img"></div>
+            <div>
+                <div class="card-icon">G</div>
+                <h2 class="card-title">GitHub</h2>
+                <p class="card-desc">The world's leading AI-powered developer platform to build, ship, and maintain software projects.</p>
+            </div>
+            <div class="card-footer">View Repositories &rarr;</div>
+        </a>
+
+        <!-- Q10 Colombia -->
+        <a href="https://www.q10.com/Colombia" target="_blank" class="card card-q10">
+            <div class="card-bg-img"></div>
+            <div>
+                <div class="card-icon">Q</div>
+                <h2 class="card-title">Q10 Colombia</h2>
+                <p class="card-desc">Academic management and virtual learning solutions tailored for institutions in Colombia.</p>
+            </div>
+            <div class="card-footer">Access Portal &rarr;</div>
+        </a>
+
+        <!-- ClassroomScreen -->
+        <a href="https://classroomscreen.com/" target="_blank" class="card card-classroom">
+            <div class="card-bg-img"></div>
+            <div>
+                <div class="card-icon">C</div>
+                <h2 class="card-title">ClassroomScreen</h2>
+                <p class="card-desc">The ultimate digital toolkit for teachers to support their class activities and maintain focus.</p>
+            </div>
+            <div class="card-footer">Open Screen &rarr;</div>
+        </a>
+
+        <!-- Educaplay -->
+        <a href="https://www.educaplay.com/resource-editor/" target="_blank" class="card card-educaplay">
+            <div class="card-bg-img"></div>
+            <div>
+                <div class="card-icon">E</div>
+                <h2 class="card-title">Educaplay Editor</h2>
+                <p class="card-desc">Design interactive educational activities and multimedia games for your students.</p>
+            </div>
+            <div class="card-footer">Edit Resources &rarr;</div>
+        </a>
+    </div>
+
+</body>
+</html>
