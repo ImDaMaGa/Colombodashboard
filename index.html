@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Resources Dashboard</title>
+    <title>Premium Resources Dashboard | Colombo Americano Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            --card-bg: rgba(15, 23, 42, 0.7);
+            /* Updated palette to reflect Colombo Americano colors (Navy, Red, White) */
+            --bg-gradient: linear-gradient(135deg, #0a192f 0%, #112240 100%);
+            --card-bg: rgba(10, 25, 47, 0.75);
             --card-border: rgba(255, 255, 255, 0.1);
-            --accent-color: #38bdf8;
+            --accent-color: #e63946; /* Colombo Red accent */
+            --secondary-accent: #38bdf8; /* Colombo Light Blue */
             --text-main: #f8fafc;
-            --text-muted: #cbd5e1;
+            --text-muted: #94a3b8;
         }
 
         * {
@@ -32,39 +34,93 @@
             align-items: center;
             padding: 2rem;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Animated background blobs */
+        /* Institutional Watermark Layer */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(10, 25, 47, 0.9), rgba(10, 25, 47, 0.9)),
+                url('https://images.unsplash.com/photo-1555505019-8c3f1c4aba5f?auto=format&fit=crop&q=80&w=1600'); /* Library/Academic feel */
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+        }
+
+        /* Bicultural Flag Accents (Subtle) */
+        .flag-accent {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 4px;
+            display: flex;
+            z-index: 100;
+        }
+        .flag-col { flex: 1; background: linear-gradient(to right, #fcd116, #003893, #ce1126); }
+        .flag-usa { flex: 1; background: linear-gradient(to right, #b22234, #ffffff, #3c3b6e); }
+
+        /* Animated background blobs with Colombo palette */
         .blob {
             position: absolute;
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(168, 85, 247, 0.2));
-            filter: blur(80px);
+            width: 600px;
+            height: 600px;
+            filter: blur(90px);
             border-radius: 50%;
             z-index: -1;
-            animation: move 20s infinite alternate;
+            animation: move 25s infinite alternate ease-in-out;
+            opacity: 0.3;
         }
 
-        .blob-1 { top: -10%; left: -10%; }
-        .blob-2 { bottom: -10%; right: -10%; animation-delay: -5s; }
+        .blob-1 { 
+            top: -10%; 
+            left: -5%; 
+            background: radial-gradient(circle, rgba(230, 57, 70, 0.4), transparent); /* Red */
+        }
+        .blob-2 { 
+            bottom: -10%; 
+            right: -5%; 
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.3), transparent); /* Blue */
+            animation-delay: -7s; 
+        }
 
         @keyframes move {
-            from { transform: translate(0, 0) scale(1); }
-            to { transform: translate(100px, 50px) scale(1.1); }
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(150px, 80px) scale(1.2); }
+            100% { transform: translate(-50px, 120px) scale(0.9); }
         }
 
         header {
             text-align: center;
             margin-bottom: 4rem;
-            margin-top: 2rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(230, 57, 70, 0.15);
+            color: var(--accent-color);
+            padding: 0.5rem 1.25rem;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(230, 57, 70, 0.3);
         }
 
         h1 {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
-            letter-spacing: -0.02em;
-            background: linear-gradient(to right, #fff, #94a3b8);
+            letter-spacing: -0.03em;
+            background: linear-gradient(to right, #fff 40%, var(--secondary-accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 1rem;
@@ -73,36 +129,37 @@
         .subtitle {
             color: var(--text-muted);
             font-size: 1.1rem;
-            max-width: 600px;
+            max-width: 650px;
+            margin: 0 auto;
         }
 
         .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
             width: 100%;
-            max-width: 1200px;
+            max-width: 1300px;
+            padding-bottom: 4rem;
         }
 
         .card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 24px;
+            border-radius: 28px;
             padding: 2.5rem;
             text-decoration: none;
             color: inherit;
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            backdrop-filter: blur(8px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(12px);
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 320px;
+            height: 360px;
             z-index: 1;
         }
 
-        /* Image Background Layer */
         .card-bg-img {
             position: absolute;
             top: 0;
@@ -112,11 +169,10 @@
             background-size: cover;
             background-position: center;
             z-index: -2;
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            opacity: 0.4; /* Default opacity */
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0.25;
         }
 
-        /* Dark Overlay Layer for Text Legibility */
         .card::after {
             content: '';
             position: absolute;
@@ -124,105 +180,133 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.9));
+            background: linear-gradient(to bottom, rgba(10, 25, 47, 0.2), rgba(10, 25, 47, 0.95));
             z-index: -1;
-            transition: opacity 0.4s;
-        }
-
-        .card:hover .card-bg-img {
-            transform: scale(1.1);
-            opacity: 0.6;
         }
 
         .card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-12px);
             border-color: var(--accent-color);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        .card:hover .card-bg-img {
+            transform: scale(1.15);
+            opacity: 0.45;
         }
 
         .card-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 16px;
+            width: 64px;
+            height: 64px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 1.5rem;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
+            font-weight: 800;
             border: 1px solid var(--card-border);
-            transition: all 0.4s;
-            backdrop-filter: blur(4px);
+            transition: all 0.5s;
         }
 
         .card:hover .card-icon {
-            transform: rotate(-10deg) scale(1.1);
+            transform: rotate(-8deg) scale(1.1);
             background: var(--accent-color);
-            color: #000;
-            border-color: transparent;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(230, 57, 70, 0.4);
         }
 
         .card-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
         }
 
         .card-desc {
             color: var(--text-muted);
             font-size: 0.95rem;
-            line-height: 1.5;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            line-height: 1.6;
         }
 
         .card-footer {
             margin-top: auto;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-weight: 600;
+            gap: 0.6rem;
+            font-weight: 700;
             font-size: 0.9rem;
-            color: var(--accent-color);
-            transition: gap 0.3s;
+            color: var(--secondary-accent);
+            transition: all 0.3s;
         }
 
         .card:hover .card-footer {
-            gap: 1rem;
+            color: var(--accent-color);
+            gap: 1.2rem;
         }
 
         /* Card-Specific Images */
-        .card-github .card-bg-img { background-image: url('https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&q=80&w=800'); }
         .card-q10 .card-bg-img { background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=800'); }
         .card-classroom .card-bg-img { background-image: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800'); }
         .card-educaplay .card-bg-img { background-image: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800'); }
+        .card-canva .card-bg-img { background-image: url('https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=800'); }
+        .card-wordwall .card-bg-img { background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800'); }
+        .card-macmillan .card-bg-img { background-image: url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=800'); }
 
         @media (max-width: 768px) {
-            body { padding: 1rem; }
+            body { padding: 1.5rem; }
             .dashboard-grid { grid-template-columns: 1fr; }
-            .card { height: auto; min-height: 280px; }
+            .card { height: auto; min-height: 300px; }
         }
     </style>
 </head>
 <body>
+    <div class="flag-accent">
+        <div class="flag-col"></div>
+        <div class="flag-usa"></div>
+    </div>
+
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
 
     <header>
+        <div class="badge">Colombo Americano</div>
         <h1>Resource Hub</h1>
-        <p class="subtitle">A curated collection of your most essential professional and educational platforms.</p>
+        <p class="subtitle">Empowering our academic community with a curated selection of bicultural and educational platforms.</p>
     </header>
 
     <div class="dashboard-grid">
-        <!-- GitHub -->
-        <a href="https://github.com/" target="_blank" class="card card-github">
+        <!-- Macmillan Education -->
+        <a href="https://www.macmillaneducationeverywhere.com/" target="_blank" class="card card-macmillan">
             <div class="card-bg-img"></div>
             <div>
-                <div class="card-icon">G</div>
-                <h2 class="card-title">GitHub</h2>
-                <p class="card-desc">The world's leading AI-powered developer platform to build, ship, and maintain software projects.</p>
+                <div class="card-icon">M</div>
+                <h2 class="card-title">Macmillan Education</h2>
+                <p class="card-desc">High-quality English teaching resources and digital textbooks for our language programs.</p>
             </div>
-            <div class="card-footer">View Repositories &rarr;</div>
+            <div class="card-footer">Enter Portal &rarr;</div>
+        </a>
+
+        <!-- Canva -->
+        <a href="https://www.canva.com/" target="_blank" class="card card-canva">
+            <div class="card-bg-img"></div>
+            <div>
+                <div class="card-icon">C</div>
+                <h2 class="card-title">Canva</h2>
+                <p class="card-desc">Design professional graphics and cultural presentations with institutional branding templates.</p>
+            </div>
+            <div class="card-footer">Create Design &rarr;</div>
+        </a>
+
+        <!-- Wordwall -->
+        <a href="https://wordwall.net/" target="_blank" class="card card-wordwall">
+            <div class="card-bg-img"></div>
+            <div>
+                <div class="card-icon">W</div>
+                <h2 class="card-title">Wordwall</h2>
+                <p class="card-desc">Gamify your English lessons with custom interactive match-ups and vocabulary games.</p>
+            </div>
+            <div class="card-footer">Make Activities &rarr;</div>
         </a>
 
         <!-- Q10 Colombia -->
@@ -230,8 +314,8 @@
             <div class="card-bg-img"></div>
             <div>
                 <div class="card-icon">Q</div>
-                <h2 class="card-title">Q10 Colombia</h2>
-                <p class="card-desc">Academic management and virtual learning solutions tailored for institutions in Colombia.</p>
+                <h2 class="card-title">Q10 Colombo</h2>
+                <p class="card-desc">Manage grades, attendance, and virtual learning specific to our institutional portal.</p>
             </div>
             <div class="card-footer">Access Portal &rarr;</div>
         </a>
@@ -240,9 +324,9 @@
         <a href="https://classroomscreen.com/" target="_blank" class="card card-classroom">
             <div class="card-bg-img"></div>
             <div>
-                <div class="card-icon">C</div>
+                <div class="card-icon">CS</div>
                 <h2 class="card-title">ClassroomScreen</h2>
-                <p class="card-desc">The ultimate digital toolkit for teachers to support their class activities and maintain focus.</p>
+                <p class="card-desc">A digital toolkit for teachers to display instructions and timers in the classroom.</p>
             </div>
             <div class="card-footer">Open Screen &rarr;</div>
         </a>
@@ -253,7 +337,7 @@
             <div>
                 <div class="card-icon">E</div>
                 <h2 class="card-title">Educaplay Editor</h2>
-                <p class="card-desc">Design interactive educational activities and multimedia games for your students.</p>
+                <p class="card-desc">Create interactive multimedia challenges to test students' language proficiency levels.</p>
             </div>
             <div class="card-footer">Edit Resources &rarr;</div>
         </a>
