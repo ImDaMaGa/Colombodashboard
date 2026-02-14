@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resources Dashboard | CCA</title>
+    <title>Premium Resources Dashboard | Colombo Americano Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -37,7 +37,7 @@
             position: relative;
         }
 
-        /* Institutional Watermark Layer */
+        /* Static Background Layer (Removed animation and fixed library feel) */
         body::before {
             content: '';
             position: fixed;
@@ -46,8 +46,8 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(10, 25, 47, 0.9), rgba(10, 25, 47, 0.9)),
-                url('https://images.unsplash.com/photo-1555505019-8c3f1c4aba5f?auto=format&fit=crop&q=80&w=1600'); /* Library/Academic feel */
+                linear-gradient(rgba(10, 25, 47, 0.95), rgba(10, 25, 47, 0.95)),
+                url('https://images.unsplash.com/photo-1555505019-8c3f1c4aba5f?auto=format&fit=crop&q=80&w=1600');
             background-size: cover;
             background-position: center;
             z-index: -2;
@@ -64,36 +64,6 @@
         }
         .flag-col { flex: 1; background: linear-gradient(to right, #fcd116, #003893, #ce1126); }
         .flag-usa { flex: 1; background: linear-gradient(to right, #b22234, #ffffff, #3c3b6e); }
-
-        /* Animated background blobs with Colombo palette */
-        .blob {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            filter: blur(90px);
-            border-radius: 50%;
-            z-index: -1;
-            animation: move 25s infinite alternate ease-in-out;
-            opacity: 0.3;
-        }
-
-        .blob-1 { 
-            top: -10%; 
-            left: -5%; 
-            background: radial-gradient(circle, rgba(230, 57, 70, 0.4), transparent); /* Red */
-        }
-        .blob-2 { 
-            bottom: -10%; 
-            right: -5%; 
-            background: radial-gradient(circle, rgba(56, 189, 248, 0.3), transparent); /* Blue */
-            animation-delay: -7s; 
-        }
-
-        @keyframes move {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(150px, 80px) scale(1.2); }
-            100% { transform: translate(-50px, 120px) scale(0.9); }
-        }
 
         header {
             text-align: center;
@@ -266,9 +236,6 @@
         <div class="flag-usa"></div>
     </div>
 
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-
     <header>
         <div class="badge">Colombo Americano</div>
         <h1>Resource Hub</h1>
@@ -277,7 +244,7 @@
 
     <div class="dashboard-grid">
         <!-- Macmillan Education -->
-        <a href="https://www.macmillaneducationeverywhere.com/" target="_blank" class="card card-macmillan">
+        <a href="https://www.macmillanenglish.com/" target="_blank" class="card card-macmillan">
             <div class="card-bg-img"></div>
             <div>
                 <div class="card-icon">M</div>
